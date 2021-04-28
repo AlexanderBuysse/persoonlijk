@@ -2,38 +2,61 @@ import Head from "next/head";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import styles from "../styles/Home.module.css";
-import { createApi } from 'unsplash-js';
+import { useState } from "react";
 
 
 export default function Home({ data }) {
-  const unsplash = createApi({ accessKey: `1lxPdRKp0QkSVk45S7e_g6OoYnIUN14TiDmtZEufkck`});
-  const name = `brugge`;
-  // feed example
-  /*unsplash.search.getPhotos({
-      query: name,
-      page: 1,
-      perPage: 1,
-      orientation: 'portrait',
-    }).then(result => {
-    if (result.errors) {
-      // handle error here
-      console.log('error occurred: ', result.errors[0]);
-    } else {
-      const feed = result.response;
+  const [imgSrc, setImgSrc] = useState();
+  const [imgDes, setImgDes] = useState(`placeholder`);
+  const [weather, setWeather] = useState(``);
+  const [isday, setIsDay] = useState(`unknown`);
 
-      // extract total and results array from response
-      const { total, results } = feed;
+  const getWeather = async (text) => {
+      const r = await fetch("/api/weather", {
+        method: "POST",
+        body: `${text}`
+      });
+      const result = await r.json();
+      //console.log(result.result.current.is_day);
 
-      // handle success here
-      console.log(`received ${results.length} photos out of ${total}`);
-      console.log('first photo: ', results[0]);
-    }
-  });*/
+      setWeather(result.result.current.condition.text);
+      setIsDay(result.result.current.is_day);
+  };
+
+
+  const getPhoto = async (text) => {
+      const r = await fetch("/api/unsplash", {
+        method: "POST",
+        body: `${text} ${weather}`
+      });
+      const result = await r.json();
+
+      setImgDes(result.results[0].description);
+      setImgSrc(result.results[0].urls.small);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    //console.log(e.target.name.value);
+    getPhoto(e.target.name.value);
+    getWeather(e.target.name.value);
+    //console.log(isday);
+    //console.log(weather);
+    e.target.reset();
+  }
 
   return (
     <Layout>
-      <p>{process.env.NEXT_PUBLIC_DEMO}</p>
-      <div className={styles.grid}>
+      <img src={imgSrc} alt={imgDes}></img>
+      <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+        <label className={styles.label}>
+          Location:
+          <input type="text" name="name" required />
+        </label>
+        <input type="submit" value="Set Location" />
+      </form>
+    </Layout>
+    /*       <div className={styles.grid}>
         {data.map((article) => (
           <Link key={article.id} href={`/articles/${article.slug}`}>
             <a className={styles.card}>
@@ -42,10 +65,10 @@ export default function Home({ data }) {
             </a>
           </Link>
         ))}
-      </div>
-    </Layout>
+      </div>*/
   );
 }
+
 export const getStaticProps = async () => {
   const resp = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/articles?_sort=id:desc`

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
+import AddCard from "../components/AddCard";
 
 
 export default function Home({ data }) {
@@ -35,7 +36,7 @@ export default function Home({ data }) {
       setImgSrc(result.results[0].urls.small);
   };
 
-  const handleSubmit = e => {
+  const handleSetLocation = e => {
     e.preventDefault();
     //console.log(e.target.name.value);
     getPhoto(e.target.name.value);
@@ -45,20 +46,26 @@ export default function Home({ data }) {
     e.target.reset();
   }
 
+  const handleSubmit = (card) => {
+    console.log(card);
+
+  }
+
   return (
     <Layout>
       <img src={imgSrc} alt={imgDes}></img>
-      <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+      <form onSubmit={(e) => handleSetLocation(e)} className={styles.form}>
         <label className={styles.label}>
           Location:
           <input type="text" name="name" required />
         </label>
         <input type="submit" value="Set Location" />
       </form>
+    <AddCard onSubmit={handleSubmit} />
     </Layout>
     /*       <div className={styles.grid}>
         {data.map((article) => (
-          <Link key={article.id} href={`/articles/${article.slug}`}>
+          <Link key={article.id} href={`/cards/${card.slug}`}>
             <a className={styles.card}>
               <h3>{article.title}</h3>
               <p>{article.description}</p>
@@ -71,7 +78,7 @@ export default function Home({ data }) {
 
 export const getStaticProps = async () => {
   const resp = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/articles?_sort=id:desc`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards?_sort=id:desc`
   );
   const data = await resp.json();
 

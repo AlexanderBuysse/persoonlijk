@@ -1,32 +1,38 @@
-import styles from "./AddComment.module.css";
+import styles from "./AddCard.module.css";
 
-const AddComment = ({ onSubmit }) => {
+const AddCard = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      name: e.target.name.value,
+      from: e.target.from.value,
+      to: e.target.to.value,
       content: e.target.content.value,
     };
+
     e.target.reset();
     onSubmit(data);
   };
 
   return (
     <section>
-      <h3>Add comment</h3>
+      <h3>Message For Home</h3>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <label className={styles.label}>
-          Name:
-          <input type="text" name="name" required />
+          From:
+          <input type="text" name="from" required />
         </label>
         <label className={styles.label}>
-          Comment:
+          To:
+          <input type="text" name="to" required />
+        </label>
+        <label className={styles.label}>
+          Message:
           <textarea name="content" required maxLength="500"></textarea>
         </label>
-        <input type="submit" value="Send" />
+        <input type="submit" value="Send"/>
       </form>
     </section>
   );
 };
 
-export default AddComment;
+export default AddCard;

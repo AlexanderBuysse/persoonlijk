@@ -11,12 +11,12 @@ const Layout = ({ children }) => {
       <header className={styles.header}>
         <h1 className={styles.title}>
           <Link href="/">
-            <a>De Naald</a>
+            <a>Persoonlijk</a>
           </Link>
         </h1>
-        <p className={styles.description}>Het nieuws komt er heet van</p>
-        <Link href="/subscribe">
-          <a>Schrijf je in voor onze nieuwsbrief</a>
+        <p className={styles.description}>Schrijf een leuk postkaartje voor thuis</p>
+        <Link href="/weather">
+          <a>Het weer</a>
         </Link>
       </header>
       <main className={styles.main}>{children}</main>

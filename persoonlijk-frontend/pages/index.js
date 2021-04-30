@@ -12,6 +12,7 @@ export default function Home({ data }) {
   const [weather, setWeather] = useState(``);
   const [location, setLocation] = useState();
   const [isday, setIsDay] = useState(`unknown`);
+  const [cards, setCards] = useState(data);
 
   const getWeather = async (text) => {
       const r = await fetch("/api/weather", {
@@ -44,8 +45,24 @@ export default function Home({ data }) {
     getWeather(e.target.location.value);
   }
 
-  const handleSubmit = (card) => {
-    console.log(card);
+  const handleSubmit = async (card) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards/`,
+      {
+        method: "POST",
+        body: JSON.stringify(card),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      const result = await response.json();
+      console.log(result);
+      const tmp = [...cards, result];
+      console.log(tmp);
+      setCards(tmp);
+    }
   }
 
   return (
@@ -76,5 +93,21 @@ export const getStaticProps = async () => {
     props: {
       data,
     },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const r = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards?_limit=3&_sort=id:desc`
+  );
+  const data = await r.json();
+
+  return {
+    paths: data.map((card) => ({
+      params: {
+        slug: card.slug,
+      },
+    })),
+    fallback: true,
   };
 };

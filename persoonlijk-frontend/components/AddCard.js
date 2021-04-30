@@ -14,9 +14,10 @@ const AddCard = ({ onSubmit, handleSetLocation, weather}) => {
       const data = {
         from: e.target.from.value,
         to: e.target.to.value,
-        content: e.target.content.value,
+        message: e.target.content.value,
         location: location,
-        weather: weather
+        weather: weather,
+        slug: location
       };
 
       e.target.reset();

@@ -4,7 +4,7 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useRouter } from "next/router";
 
-const Article = ({ data }) => {
+const Card = ({ data }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <p>Loading...</p>;
@@ -42,11 +42,11 @@ const Article = ({ data }) => {
   );
 };
 
-export default Article;
+export default Card;
 
 export const getStaticProps = async ({ params }) => {
   const r = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/articles/?slug=${params.slug}`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards/?slug=${params.slug}`
   );
   const data = await r.json();
 
@@ -60,14 +60,14 @@ export const getStaticProps = async ({ params }) => {
 
 export const getStaticPaths = async () => {
   const r = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/articles?_limit=3&_sort=id:desc`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards?_limit=3&_sort=id:desc`
   );
   const data = await r.json();
 
   return {
-    paths: data.map((article) => ({
+    paths: data.map((card) => ({
       params: {
-        slug: article.slug,
+        slug: card.slug,
       },
     })),
     fallback: true,

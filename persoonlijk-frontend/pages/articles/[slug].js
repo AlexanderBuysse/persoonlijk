@@ -1,7 +1,6 @@
 import Comments from "../../components/Comments";
 import Layout from "../../components/Layout";
 import { useState } from "react";
-import AddComment from "../../components/AddCard";
 import ReactMarkdown from "react-markdown";
 import { useRouter } from "next/router";
 
@@ -38,7 +37,6 @@ const Article = ({ data }) => {
         <h2>{data.title}</h2>
         <ReactMarkdown source={data.content} escapeHtml={false} />
         <Comments comments={comments} />
-        <AddComment onSubmit={handleSubmit} />
       </>
     </Layout>
   );

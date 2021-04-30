@@ -3,14 +3,13 @@ import { createApi } from 'unsplash-js';
 export default async (req, res) => {
     try {
         const unsplash = createApi({ accessKey: `${process.env.UNSPLASH_API_KEY}`});
-        console.log(process.env.UNSPLASH_API_KEY);
         const name = req.body;
     // feed example
         unsplash.search.getPhotos({
             query: name,
             page: 1,
             perPage: 1,
-            orientation: 'landscape',
+            orientation: 'portrait',
             }).then(result => {
             if (result.errors) {
             // handle error here

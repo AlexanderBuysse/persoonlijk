@@ -11,10 +11,6 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "article": {
-      "model": "article",
-      "via": "comments"
-    },
     "name": {
       "type": "string",
       "required": true

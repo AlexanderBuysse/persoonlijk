@@ -10,6 +10,7 @@ export default function Home({ data }) {
   const [imgSrc, setImgSrc] = useState();
   const [imgDes, setImgDes] = useState(`placeholder`);
   const [weather, setWeather] = useState(``);
+  const [location, setLocation] = useState();
   const [isday, setIsDay] = useState(`unknown`);
 
   const getWeather = async (text) => {
@@ -19,7 +20,7 @@ export default function Home({ data }) {
       });
       const result = await r.json();
       //console.log(result.result.current.is_day);
-
+      console.log(text);
       setWeather(result.result.current.condition.text);
       setIsDay(result.result.current.is_day);
   };
@@ -37,31 +38,20 @@ export default function Home({ data }) {
   };
 
   const handleSetLocation = e => {
-    e.preventDefault();
-    //console.log(e.target.name.value);
-    getPhoto(e.target.name.value);
-    getWeather(e.target.name.value);
-    //console.log(isday);
-    //console.log(weather);
-    e.target.reset();
+    console.log(e.target);
+    setLocation(e.target.location.value)
+    getPhoto(e.target.location.value);
+    getWeather(e.target.location.value);
   }
 
   const handleSubmit = (card) => {
     console.log(card);
-
   }
 
   return (
     <Layout>
       <img src={imgSrc} alt={imgDes}></img>
-      <form onSubmit={(e) => handleSetLocation(e)} className={styles.form}>
-        <label className={styles.label}>
-          Location:
-          <input type="text" name="name" required />
-        </label>
-        <input type="submit" value="Set Location" />
-      </form>
-    <AddCard onSubmit={handleSubmit} />
+    <AddCard onSubmit={handleSubmit} handleSetLocation={handleSetLocation} location={location} weather={weather}/>
     </Layout>
     /*       <div className={styles.grid}>
         {data.map((article) => (

@@ -1,22 +1,51 @@
 import styles from "./AddCard.module.css";
+import { useState } from "react";
 
-const AddCard = ({ onSubmit }) => {
+
+const AddCard = ({ onSubmit, handleSetLocation, weather}) => {
+  const [location, setLocation] = useState(``);
+  const [error, setError] = useState(``);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      from: e.target.from.value,
-      to: e.target.to.value,
-      content: e.target.content.value,
-    };
+    if (location === ``) {
+      setError(`Select a Location please`)
+    } else {
+      const data = {
+        from: e.target.from.value,
+        to: e.target.to.value,
+        content: e.target.content.value,
+        location: location,
+        weather: weather
+      };
 
-    e.target.reset();
-    onSubmit(data);
+      e.target.reset();
+      onSubmit(data);
+    }
   };
+
+  const handleOnClickSubmit = e => {
+    e.preventDefault();
+
+    setLocation(e.target.location.value)
+    handleSetLocation(e);
+  }
 
   return (
     <section>
       <h3>Message For Home</h3>
+      <form onSubmit={e => handleOnClickSubmit(e)}>
+        <div>
+          <label className={styles.label}>
+            Location:
+            <input className="location" type="text" name="location" required />
+             <p>{error}</p>
+          </label>
+          <input type="submit" value="Set Location" />
+        </div>
+      </form>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+        <input hidden value={location} readOnly/>
         <label className={styles.label}>
           From:
           <input type="text" name="from" required />
@@ -29,7 +58,7 @@ const AddCard = ({ onSubmit }) => {
           Message:
           <textarea name="content" required maxLength="500"></textarea>
         </label>
-        <input type="submit" value="Send"/>
+        <input type="submit" value="Send Post Card"/>
       </form>
     </section>
   );

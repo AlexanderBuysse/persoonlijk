@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cards",
+  "info": {
+    "name": "Card",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "from": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string",
+      "required": true
+    },
+    "message": {
+      "type": "richtext",
+      "required": true,
+      "maxLength": 500
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "location": {
+      "type": "string",
+      "private": false,
+      "required": true
+    },
+    "weather": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

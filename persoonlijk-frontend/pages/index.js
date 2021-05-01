@@ -21,11 +21,26 @@ export default function Home({ data }) {
       });
       const result = await r.json();
       //console.log(result.result.current.is_day);
-      console.log(text);
       setWeather(result.result.current.condition.text);
       setIsDay(result.result.current.is_day);
   };
 
+  const getLocation = () => {
+    console.log(`klik`);
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      console.log("Latitude: " + position.coords.latitude +
+      "    Longitude: " + position.coords.longitude);
+    }   
+    getLocation();
+   }
 
   const getPhoto = async (text) => {
       const r = await fetch("/api/unsplash", {
@@ -67,10 +82,11 @@ export default function Home({ data }) {
 
   return (
     <Layout>
-      <img src={imgSrc} alt={imgDes}></img>
+      <button onClick={getLocation}> klik hier voor je locatie</button>
+      <img src={imgSrc} alt={imgDes} width="200"></img>
     <AddCard onSubmit={handleSubmit} handleSetLocation={handleSetLocation} location={location} weather={weather}/>
     </Layout>
-    /*       <div className={styles.grid}>
+    /*<div className={styles.grid}>
         {data.map((article) => (
           <Link key={article.id} href={`/cards/${card.slug}`}>
             <a className={styles.card}>

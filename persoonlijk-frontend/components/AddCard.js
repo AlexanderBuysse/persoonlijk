@@ -5,6 +5,7 @@ import { useState } from "react";
 const AddCard = ({ onSubmit, handleSetLocation, weather}) => {
   const [location, setLocation] = useState(``);
   const [error, setError] = useState(``);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const AddCard = ({ onSubmit, handleSetLocation, weather}) => {
         message: e.target.content.value,
         location: location,
         weather: weather,
-        slug: location
+        slug: `message-from-`+ e.target.from.value + `-in-` + location + `-` + Math.floor(Math.random() * 20000) + 1
       };
 
       e.target.reset();

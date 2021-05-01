@@ -99,7 +99,7 @@ export default function Home({ data }) {
   );
 }
 
-export const getStaticProps = async () => {
+/*export const getStaticProps = async () => {
   const resp = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards?_sort=id:desc`
   );
@@ -126,4 +126,4 @@ export const getStaticPaths = async () => {
     })),
     fallback: true,
   };
-};
+};*/

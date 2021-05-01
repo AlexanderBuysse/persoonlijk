@@ -35,7 +35,6 @@ const Card = ({ }) => {
     <Layout>
       <>
         <h2>{}</h2>
-        <ReactMarkdown source={} escapeHtml={false} />
       </>
     </Layout>
   );

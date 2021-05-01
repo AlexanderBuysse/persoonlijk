@@ -40,7 +40,7 @@ const AddCard = ({ onSubmit, handleSetLocation, weather}) => {
         <div>
           <label className={styles.label}>
             Location:
-            <input className="location" type="text" name="location" required />
+            <input className="location" type="text" name="location" readOnly required />
              <p>{error}</p>
           </label>
           <input type="submit" value="Set Location" />

@@ -44,7 +44,7 @@ const Card = ({ data }) => {
 
 export default Card;
 
-export const getStaticProps = async ({ params }) => {
+/*export const getStaticProps = async ({ params }) => {
   const r = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards/?slug=${params.slug}`
   );
@@ -72,4 +72,4 @@ export const getStaticPaths = async () => {
     })),
     fallback: true,
   };
-};
+};*/

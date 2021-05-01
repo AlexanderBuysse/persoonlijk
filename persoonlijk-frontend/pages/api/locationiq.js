@@ -1,6 +1,3 @@
-
-  
-// Step 2: Get city name
 function getCity(coordinates) {
     var xhr = new XMLHttpRequest();
     var lat = coordinates[0];

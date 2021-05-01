@@ -4,13 +4,13 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useRouter } from "next/router";
 
-const Card = ({ data }) => {
+const Card = ({ }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <p>Loading...</p>;
   }
 
-  const [comments, setComments] = useState(data.comments);
+  /*const [comments, setComments] = useState(data.comments);
 
   const handleSubmit = async (comment) => {
     comment.article = data.id;
@@ -29,14 +29,13 @@ const Card = ({ data }) => {
       const tmp = [...comments, result];
       setComments(tmp);
     }
-  };
+  };*/
 
   return (
     <Layout>
       <>
-        <h2>{data.title}</h2>
-        <ReactMarkdown source={data.content} escapeHtml={false} />
-        <Comments comments={comments} />
+        <h2>{}</h2>
+        <ReactMarkdown source={} escapeHtml={false} />
       </>
     </Layout>
   );

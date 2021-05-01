@@ -36,7 +36,7 @@ export default async (req, res) => {
           if(result.readyState == 4 && result.status == 200){         
               let response = JSON.parse(xhr.responseText);
               let city = response.address.city;
-              res.city= city;
+              res.status(500).city= city;
           }
         }
         }

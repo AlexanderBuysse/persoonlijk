@@ -2,7 +2,7 @@ import styles from "./AddCard.module.css";
 import { useState } from "react";
 
 
-const AddCard = ({ onSubmit, weather, location}) => {
+const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc}) => {
   const [error, setError] = useState(``);
   
 
@@ -17,7 +17,9 @@ const AddCard = ({ onSubmit, weather, location}) => {
         message: e.target.content.value,
         location: location,
         weather: weather,
-        slug: `message-from-`+ e.target.from.value + `-in-` + location + `-` + Math.floor(Math.random() * 20000) + 1
+        slug: `message-from-`+ e.target.from.value + `-in-` + location + `-` + Math.floor(Math.random() * 20000) + 1,
+        src: imgSrc,
+        imgdescript: `${imgDes}`
       };
 
       e.target.reset();

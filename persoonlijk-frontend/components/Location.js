@@ -1,10 +1,13 @@
+import { useState } from "react";
+
 const Location = ({ error, setError, getPhoto, getWeather, setLocation }) => {
+    const [state, setState] = useState(`click here for your location`);
     const handleSetLocation = () => {
         getLocation();
+        setState(`loading...`)
     }
 
     const getLocation = () => {
-        console.log(`klik`);
         let options = {
             enableHighAccuracy: true,
             timeout: 5000,
@@ -45,12 +48,20 @@ const Location = ({ error, setError, getPhoto, getWeather, setLocation }) => {
             getWeather(city);
         }
         }
+        setState(`Done`);
+    }
+    const checkdone = () => {
+        if(state===`Done`) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
   return (
       <>
         <p>{error}</p>
-        <button onClick={handleSetLocation}> click here for your location</button>
+        <button onClick={handleSetLocation} disabled={checkdone()}> {state}</button>
       </>
   );
 };

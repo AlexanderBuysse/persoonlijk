@@ -28,7 +28,7 @@ export default async (req, res) => {
         let lng = coordinates[1];
       
         // Paste your LocationIQ token below.
-        xhr.open('GET', "https://us1.locationiq.com/v1/reverse.php?key=pk.22f3c538b9020272ffb667ec3f30797b&lat=" +
+        xhr.open('GET', `https://us1.locationiq.com/v1/reverse.php?key=${process.env.LOCATION_API_KEY}&lat=` +
         lat + "&lon=" + lng + "&format=json", true);
         xhr.send();
         xhr.onreadystatechange = x => {

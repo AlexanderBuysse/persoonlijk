@@ -41,6 +41,7 @@ export default function Home({ data }) {
   };
 
   const handleSubmit = async (card) => {
+    console.log(card);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards/`,
       {
@@ -64,7 +65,7 @@ export default function Home({ data }) {
     <Layout>
       <Location error={error} setError={setError} location={location} setLocation={setLocation} getWeather={getWeather} getPhoto={getPhoto}/>
       <img src={imgSrc} alt={imgDes} width="200"></img>
-      <AddCard onSubmit={handleSubmit} location={location} weather={weather}/>
+      <AddCard onSubmit={handleSubmit} location={location} weather={weather} imgDes={imgDes} imgSrc={imgSrc}/>
     </Layout>
     /*<div className={styles.grid}>
         {data.map((article) => (
@@ -79,7 +80,7 @@ export default function Home({ data }) {
   );
 }
 
-/*export const getStaticProps = async () => {
+export const getStaticProps = async () => {
   const resp = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards?_sort=id:desc`
   );
@@ -106,4 +107,4 @@ export const getStaticPaths = async () => {
     })),
     fallback: true,
   };
-};*/
+};

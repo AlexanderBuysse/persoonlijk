@@ -27,7 +27,7 @@ export default function Home({ data }) {
 
   const getLocation = () => {
     console.log(`klik`);
-    function getLocation() {
+    const getLocation= ()=> {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
       } else {

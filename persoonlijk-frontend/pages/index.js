@@ -26,7 +26,12 @@ export default function Home({ data }) {
   };
 
   const getLocation = () => {
-    }
+      const r = await fetch("/api/locationiq", {
+        method: "GET",
+      });
+      const result = await r.json();
+      console.log(result);
+  }
 
   const getPhoto = async (text) => {
       const r = await fetch("/api/unsplash", {

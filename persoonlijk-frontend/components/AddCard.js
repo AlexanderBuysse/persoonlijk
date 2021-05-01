@@ -2,8 +2,7 @@ import styles from "./AddCard.module.css";
 import { useState } from "react";
 
 
-const AddCard = ({ onSubmit, handleSetLocation, weather}) => {
-  const [location, setLocation] = useState(``);
+const AddCard = ({ onSubmit, weather, location}) => {
   const [error, setError] = useState(``);
   
 
@@ -26,28 +25,17 @@ const AddCard = ({ onSubmit, handleSetLocation, weather}) => {
     }
   };
 
-  const handleOnClickSubmit = e => {
-    e.preventDefault();
-
-    setLocation(e.target.location.value)
-    handleSetLocation(e);
-  }
-
   return (
     <section>
       <h3>Message For Home</h3>
-      <form onSubmit={e => handleOnClickSubmit(e)}>
-        <div>
-          <label className={styles.label}>
-            Location:
-            <input className="location" type="text" name="location" readOnly required />
-             <p>{error}</p>
-          </label>
-          <input type="submit" value="Set Location" />
-        </div>
-      </form>
+      <p>{error}</p>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <input hidden value={location} readOnly/>
+          <label className={styles.label}>
+            Location:
+            <input className="location" type="text" name="location" value={location} readOnly required />
+          </label>
+
         <label className={styles.label}>
           From:
           <input type="text" name="from" required />

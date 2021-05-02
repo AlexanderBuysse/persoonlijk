@@ -3,14 +3,16 @@ import { useState } from "react";
 import Link from "next/link";
 
 
-const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards}) => {
+const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards, weathericon, isday}) => {
   const [error, setError] = useState(``);  
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (location === ``) {
       setError(`Select a Location please`)
     } else {
+      console.log(weathericon);
       const data = {
         from: `${e.target.from.value}`,
         to: `${e.target.to.value}`,
@@ -19,7 +21,9 @@ const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards}) => {
         weather: `${weather}`,
         slug: `message-from-`+ e.target.from.value + `-in-` + location + `-` + Math.floor(Math.random() * 20000) + 1,
         src: `${imgSrc}`,
-        imgdescript: `${imgDes}`
+        imgdescript: `${imgDes}`,
+        weathericon: `${weathericon}`,
+        isday: `${isday}`
       };
 
       e.target.reset();

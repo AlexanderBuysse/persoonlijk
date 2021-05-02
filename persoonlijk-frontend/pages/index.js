@@ -11,10 +11,11 @@ export default function Home({ data }) {
   const [imgSrc, setImgSrc] = useState(`/../public/assets/placeholder.jpeg`);
   const [imgDes, setImgDes] = useState(`placeholder`);
   const [weather, setWeather] = useState(``);
-  const [weatherResult, setWeatherResult] = useState();  
   const [location, setLocation] = useState(``);
   const [cards, setCards] = useState(data);
   const [error, setError] = useState();
+  const [isday, setIsday] = useState();
+  const [weathericon, setWeathericon] = useState();
 
   const getWeather = async (text) => {
     console.log(text);
@@ -23,7 +24,8 @@ export default function Home({ data }) {
         body: `${text}`
       });
       const result = await r.json();
-       setWeatherResult(result);
+      setIsday(result.result.current.is_day)
+      setWeathericon(result.result.current.condition.icon)
       setWeather(result.result.current.condition.text);
   };
 
@@ -67,9 +69,9 @@ export default function Home({ data }) {
           </div>
           <Location error={error} setError={setError} location={location} setLocation={setLocation} getWeather={getWeather} getPhoto={getPhoto}/>
         </div>
-        <LocationDetial weatherResult={weatherResult}/>
+        <LocationDetial  weather={weather} weathericon={weathericon} isday={isday}/>
       </div>
-      <AddCard onSubmit={handleSubmit} location={location} weather={weather} imgDes={imgDes} imgSrc={imgSrc} cards={cards}/>
+      <AddCard onSubmit={handleSubmit} location={location} weather={weather} weathericon={weathericon} isday={isday} imgDes={imgDes} imgSrc={imgSrc} cards={cards}/>
     </Layout>
   );
 }

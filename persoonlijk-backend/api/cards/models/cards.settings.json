@@ -46,6 +46,14 @@
     "src": {
       "type": "string",
       "required": true
+    },
+    "isday": {
+      "type": "string",
+      "required": false
+    },
+    "weathericon": {
+      "type": "string",
+      "required": false
     }
   }
 }

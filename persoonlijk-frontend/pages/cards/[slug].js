@@ -1,8 +1,10 @@
 import Layout from "../../components/Layout";
-import { useState } from "react";
-import ReactMarkdown from "react-markdown";
+import LocationDetial from "../../components/LocationDetail";
+import Image from 'next/image'
+
 import { useRouter } from "next/router";
 import styles from "../../components/AddCard.module.css";
+import style from "../../styles/Home.module.css"
 
 
 const Card = ({ data }) => {
@@ -10,12 +12,20 @@ const Card = ({ data }) => {
   if (router.isFallback) {
     return <p>Loading...</p>;
   }
+  console.log(process.env.LINK_HOME);
 
   return (
     <Layout>
       <>
       <section>
       <h3>Message For Home</h3>
+      <div className={style.flex}>
+        <div className={style.imageright}>
+          <Image src={data.src} alt={data.Imgdescript} width="200" height="300"/>
+        </div>
+        <LocationDetial weathericon={data.weathericon} isday={data.isday} weather={data.weather}/>
+      </div>
+      
       <form className={styles.form}>
           <label className={styles.label}>
             Location:
@@ -24,25 +34,19 @@ const Card = ({ data }) => {
 
         <label className={styles.label}>
           From:
-          <input type="text" value={data.from} name="from" required />
+          <input readOnly type="text" value={data.from} name="from" required />
         </label>
         <label className={styles.label}>
           To:
-          <input type="text" value={data.to} name="to" required />
+          <input readOnly type="text" value={data.to} name="to" required />
         </label>
         <label className={styles.label}>
           Message:
-          <textarea name="content" required maxLength="500" value={data.message}></textarea>
+          <textarea readOnly name="content" required maxLength="500" value={data.message}></textarea>
         </label>
       </form>
-      <p>Last post card: {process.env.LINK}/cards/{data.slug}</p>
+      <p>Link of card-- {process.env.LINK_HOME}/cards/{data.slug}</p>
       </section>
-        <h2>{data.from}</h2>
-        <p>{data.to}</p>
-        <p>{data.location}</p>
-        <p>{data.message}</p>
-        <p>{data.weather}</p>
-        <img src={data.src} alt={data.Imgdescript} width="200"></img>
       </>
     </Layout>
   );

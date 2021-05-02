@@ -19,9 +19,6 @@ const Layout = ({ children }) => {
       <main className={styles.main}>{children}</main>
     </div>
   );
-  /* <Link href="/weather">
-          <a>Het weer</a>
-        </Link> */
 };
 
 export default Layout;

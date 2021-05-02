@@ -4,9 +4,7 @@ import Link from "next/link";
 
 
 const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards}) => {
-  const [error, setError] = useState(``);
-  const [slug, setSlug] = useState();
-  
+  const [error, setError] = useState(``);  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +52,7 @@ const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards}) => {
         </label>
         <input type="submit" value="Send Post Card"/>
       </form>
-      <Link href={`/cards/${cards[cards.length - 1].slug}`}><a>Last post card</a></Link>
+      <Link href={`/cards/${cards[cards.length - 1].slug}`}><a>Last post card: {process.env.LINK}/cards/{cards[cards.length - 1].slug}</a></Link>
     </section>
   );
 };

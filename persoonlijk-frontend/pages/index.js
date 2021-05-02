@@ -4,14 +4,15 @@ import Location from "../components/Location";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 import AddCard from "../components/AddCard";
-
+import LocationDetial from "../components/LocationDetail";
+import Image from 'next/image'
 
 export default function Home({ data }) {
-  const [imgSrc, setImgSrc] = useState();
+  const [imgSrc, setImgSrc] = useState(`/../public/assets/placeholder.jpeg`);
   const [imgDes, setImgDes] = useState(`placeholder`);
   const [weather, setWeather] = useState(``);
+  const [weatherResult, setWeatherResult] = useState();  
   const [location, setLocation] = useState(``);
-  const [isday, setIsDay] = useState(`unknown`);
   const [cards, setCards] = useState(data);
   const [error, setError] = useState();
 
@@ -22,9 +23,8 @@ export default function Home({ data }) {
         body: `${text}`
       });
       const result = await r.json();
-      //console.log(result.result.current.is_day);
+       setWeatherResult(result);
       setWeather(result.result.current.condition.text);
-      setIsDay(result.result.current.is_day);
   };
 
   const getPhoto = async (text) => {
@@ -53,29 +53,24 @@ export default function Home({ data }) {
     );
     if (response.ok) {
       const result = await response.json();
-      console.log(result);
       const tmp = [...cards, result];
-      console.log(tmp);
       setCards(tmp);
     }
   }
 
   return (
     <Layout>
-      <Location error={error} setError={setError} location={location} setLocation={setLocation} getWeather={getWeather} getPhoto={getPhoto}/>
-      <img src={imgSrc} alt={imgDes} width="200"></img>
+      <div className={styles.flex}>
+        <div>
+          <div className={styles.imageright}>
+            <Image src={imgSrc} alt={imgDes} width="200" height="300"/>
+          </div>
+          <Location error={error} setError={setError} location={location} setLocation={setLocation} getWeather={getWeather} getPhoto={getPhoto}/>
+        </div>
+        <LocationDetial weatherResult={weatherResult}/>
+      </div>
       <AddCard onSubmit={handleSubmit} location={location} weather={weather} imgDes={imgDes} imgSrc={imgSrc} cards={cards}/>
     </Layout>
-    /*<div className={styles.grid}>
-        {data.map((article) => (
-          <Link key={article.id} href={`/cards/${card.slug}`}>
-            <a className={styles.card}>
-              <h3>{article.title}</h3>
-              <p>{article.description}</p>
-            </a>
-          </Link>
-        ))}
-      </div>*/
   );
 }
 

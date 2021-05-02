@@ -35,7 +35,7 @@ const Location = ({ error, setError, getPhoto, getWeather, setLocation }) => {
         let lat = coordinates[0];
         let lng = coordinates[1];
     
-        xhr.open('GET', "https://us1.locationiq.com/v1/reverse.php?key=pk.22f3c538b9020272ffb667ec3f30797b&lat=" +
+        xhr.open('GET', `https://us1.locationiq.com/v1/reverse.php?key=pk.22f3c538b9020272ffb667ec3f30797b&lat=` +
         lat + "&lon=" + lng + "&format=json", true);
         xhr.send();
         xhr.onreadystatechange = (x) => {

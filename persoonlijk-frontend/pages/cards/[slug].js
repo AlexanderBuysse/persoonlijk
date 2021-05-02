@@ -12,7 +12,12 @@ const Card = ({ data }) => {
   return (
     <Layout>
       <>
-        <h2>titel</h2>
+        <h2>{data.from}</h2>
+        <p>{data.to}</p>
+        <p>{data.location}</p>
+        <p>{data.location}</p>
+        <p>{data.message}</p>
+        <img src={data.src} alt={data.Imgdescript} width="200"></img>
       </>
     </Layout>
   );
@@ -39,7 +44,6 @@ export const getStaticPaths = async () => {
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards?_limit=3&_sort=id:desc`
   );
   const data = await r.json();
-
   return {
     paths: data.map((card) => ({
       params: {

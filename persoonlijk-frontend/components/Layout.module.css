@@ -12,8 +12,10 @@
 
 .main {
   width: 100%;
-  padding: 2rem 0;
+  padding: 2rem;
+  border-radius: 2rem;
   flex: 1;
+  background-color: rgb(233, 233, 193);
 }
 
 .header {

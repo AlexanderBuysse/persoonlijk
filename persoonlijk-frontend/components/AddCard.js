@@ -1,6 +1,7 @@
 import styles from "./AddCard.module.css";
 import { useState } from "react";
 import Link from "next/link";
+import style from "./Layout.module.css";
 
 
 const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards, weathericon, isday}) => {
@@ -56,7 +57,7 @@ const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards, weatheric
         </label>
         <input type="submit" value="Send Post Card"/>
       </form>
-      <Link href={`/cards/${cards[cards.length - 1].slug}`}><a>Last post card: {process.env.LINK}/cards/{cards[cards.length - 1].slug}</a></Link>
+      <Link href={`/cards/${cards[cards.length - 1].slug}`}><a className={styles.link}>Last post card: {process.env.LINK}/cards/{cards[cards.length - 1].slug}</a></Link>
     </section>
   );
 };

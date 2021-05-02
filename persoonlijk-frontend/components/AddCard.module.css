@@ -4,6 +4,20 @@
   gap: 1rem;
 }
 
+.link {
+  color: #0070f3;
+  text-decoration: none;
+  margin-top: 2rem;
+  line-height: 1.15;
+  font-size: 1rem;
+}
+
+.link:hover,
+.link:focus,
+.link:active {
+  text-decoration: underline;
+}
+
 .label {
   display: grid;
   grid-template-columns: 10ch 1fr;

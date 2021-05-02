@@ -6,4 +6,9 @@
 
 .imageright {
   margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.border {
+  border-radius: 2rem;
 }

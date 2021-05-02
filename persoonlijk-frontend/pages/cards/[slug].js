@@ -18,10 +18,10 @@ const Card = ({ data }) => {
     <Layout>
       <>
       <section>
-      <h3>Message For Home</h3>
+      <h3>Greetings from {data.location}</h3>
       <div className={style.flex}>
         <div className={style.imageright}>
-          <Image src={data.src} alt={data.Imgdescript} width="200" height="300"/>
+          <Image className={style.border} src={data.src} alt={data.Imgdescript} width="200" height="300"/>
         </div>
         <LocationDetial weathericon={data.weathericon} isday={data.isday} weather={data.weather}/>
       </div>

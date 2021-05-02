@@ -7,6 +7,7 @@ const Layout = ({ children }) => {
       <Head>
         <title>Vacation Postcard</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://use.typekit.net/ygg3xyj.css"></link>
       </Head>
       <header className={styles.header}>
         <h1 className={styles.title}>

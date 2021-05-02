@@ -65,7 +65,7 @@ export default function Home({ data }) {
       <div className={styles.flex}>
         <div>
           <div className={styles.imageright}>
-            <Image src={imgSrc} alt={imgDes} width="200" height="300"/>
+            <Image className={styles.border} src={imgSrc} alt={imgDes} width="200" height="300"/>
           </div>
           <Location error={error} setError={setError} location={location} setLocation={setLocation} getWeather={getWeather} getPhoto={getPhoto}/>
         </div>

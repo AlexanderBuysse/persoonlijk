@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import Layout from "../components/Layout";
 import Location from "../components/Location";
 import styles from "../styles/Home.module.css";
@@ -65,7 +64,7 @@ export default function Home({ data }) {
     <Layout>
       <Location error={error} setError={setError} location={location} setLocation={setLocation} getWeather={getWeather} getPhoto={getPhoto}/>
       <img src={imgSrc} alt={imgDes} width="200"></img>
-      <AddCard onSubmit={handleSubmit} location={location} weather={weather} imgDes={imgDes} imgSrc={imgSrc}/>
+      <AddCard onSubmit={handleSubmit} location={location} weather={weather} imgDes={imgDes} imgSrc={imgSrc} cards={cards}/>
     </Layout>
     /*<div className={styles.grid}>
         {data.map((article) => (

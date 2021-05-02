@@ -1,9 +1,11 @@
 import styles from "./AddCard.module.css";
 import { useState } from "react";
+import Link from "next/link";
 
 
-const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc}) => {
+const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc, cards}) => {
   const [error, setError] = useState(``);
+  const [slug, setSlug] = useState();
   
 
   const handleSubmit = (e) => {
@@ -12,13 +14,13 @@ const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc}) => {
       setError(`Select a Location please`)
     } else {
       const data = {
-        from: e.target.from.value,
-        to: e.target.to.value,
-        message: e.target.content.value,
-        location: location,
-        weather: weather,
+        from: `${e.target.from.value}`,
+        to: `${e.target.to.value}`,
+        message: `${e.target.content.value}`,
+        location: `${location}`,
+        weather: `${weather}`,
         slug: `message-from-`+ e.target.from.value + `-in-` + location + `-` + Math.floor(Math.random() * 20000) + 1,
-        src: imgSrc,
+        src: `${imgSrc}`,
         imgdescript: `${imgDes}`
       };
 
@@ -52,6 +54,7 @@ const AddCard = ({ onSubmit, weather, location, imgDes, imgSrc}) => {
         </label>
         <input type="submit" value="Send Post Card"/>
       </form>
+      <Link href={`/cards/${cards[cards.length - 1].slug}`}><a>Last post card</a></Link>
     </section>
   );
 };

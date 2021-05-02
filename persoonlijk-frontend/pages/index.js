@@ -92,7 +92,7 @@ export const getStaticProps = async () => {
   };
 };
 
-export const getStaticPaths = async () => {
+/*export const getStaticPaths = async () => {
   const r = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards?_limit=3&_sort=id:desc`
   );
@@ -106,4 +106,4 @@ export const getStaticPaths = async () => {
     })),
     fallback: true,
   };
-};
+};*/

@@ -1,40 +1,18 @@
-import Comments from "../../components/Comments";
 import Layout from "../../components/Layout";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useRouter } from "next/router";
 
-const Card = ({ }) => {
+const Card = ({ data }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <p>Loading...</p>;
   }
 
-  /*const [comments, setComments] = useState(data.comments);
-
-  const handleSubmit = async (comment) => {
-    comment.article = data.id;
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/comments/`,
-      {
-        method: "POST",
-        body: JSON.stringify(comment),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.ok) {
-      const result = await response.json();
-      const tmp = [...comments, result];
-      setComments(tmp);
-    }
-  };*/
-
   return (
     <Layout>
       <>
-        <h2>{}</h2>
+        <h2>titel</h2>
       </>
     </Layout>
   );
@@ -42,7 +20,7 @@ const Card = ({ }) => {
 
 export default Card;
 
-/*export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
   const r = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/cards/?slug=${params.slug}`
   );
@@ -70,4 +48,4 @@ export const getStaticPaths = async () => {
     })),
     fallback: true,
   };
-};*/
+};

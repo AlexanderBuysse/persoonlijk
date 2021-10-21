@@ -5,3 +5,4 @@ This project is made in Next.js and we had to use some specific features of Next
 It was also required that we used new technologies we hadden't seen in our lessons.
 
 I used different api's and geolocation.
+For the backend is used Strapi.
